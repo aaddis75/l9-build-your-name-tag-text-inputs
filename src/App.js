@@ -4,7 +4,7 @@ import UserInput from "./UserInput.js";
 
 class App extends Component {
   state = {
-    names: ["Erin", "Ann", "Nichole", "Sharon", "Maryn"]
+    names: ["Erin", "Ann", "Nichole", "Sharon", "Maryn"],
   };
   removeName = (clickedIndex) => {
     // to learn how the .filter method works, check out https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
@@ -12,11 +12,17 @@ class App extends Component {
     const newNames = this.state.names.filter(filterCallback);
     this.setState({ names: newNames });
   };
+
+  addName = (oneNewName) => {
+    this.setState({
+      names: [...this.state.names, oneNewName],
+    });
+  };
   render() {
     return (
       <div className="App">
         <h1>Name Tag Generator</h1>
-        <UserInput />
+        <UserInput addName={this.addName} />
         <NameTagList names={this.state.names} removeName={this.removeName} />
       </div>
     );
