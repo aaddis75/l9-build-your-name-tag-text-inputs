@@ -18,6 +18,24 @@ class App extends Component {
       names: [...this.state.names, oneNewName],
     });
   };
+
+componentDidUpdate() {
+     const savedNamesString = JSON.stringify(this.state.names);
+     localStorage.setItem("message", this.state.message);
+     localStorage.setItem("savedNames", savedNamesString);
+
+}
+
+ componentDidMount() {
+  const savedNamesString = localStorage.getItem("savedNames");
+   if (savedNamesString) {
+    const savedNames = JSON.parse(savedNamesString);
+    this.setState({
+  names: savedNames,
+});
+} 
+}
+
   render() {
     return (
       <div className="App">
@@ -30,3 +48,7 @@ class App extends Component {
 }
 
 export default App;
+
+
+
+
